@@ -21,4 +21,10 @@ def mask_account_card (info: str) ->str:
         #Возвращаем готовую маскировку
         return f'{type_name} {masked_number}'
 
-def get_date(data)
+from datetime import datetime
+
+def get_date(data_str: str) -> str:
+    #Принимаем строку с датой в исходном формате
+    dt_object = datetime.strptime(data_str, '%Y-%m-%dT%H:%M^%S.%f')
+    return dt_object.strptime('%d.%m.%Y')
+
