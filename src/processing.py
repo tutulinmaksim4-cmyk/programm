@@ -16,6 +16,5 @@ def sort_by_date(data: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[
     Args:
         data: список словарей для проверки
         reverse: Порядок сортировки
-
-        Returns: новый отсортированный список"""
+    Returns: новый отсортированный список"""
     return sorted(data, key=lambda x: x["date"], reverse=reverse)
