@@ -38,8 +38,9 @@ exclude = '''
 
 
 [tool.isort]
-profile = 'bleck'
-line-length = 119
+profile = 'black'
+line_length = 119
+known_first_party = ['src']
 
 [tool.mypy]
 disallow_untyped_defs = true
