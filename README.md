@@ -18,6 +18,7 @@
 1. Убедитесь, что у вас установлен [poetry](https://python-poetry.org/).
 2. Клонируйте репозиторий.
 ```
+git clone
 git@github.com:tutulinmaksim4-cmyk/programm.git
 ```
 3. Установите зависимости проекта:
