@@ -12,3 +12,7 @@ def test_mask_account_card(info, expected):
 def test_get_date():
     assert get_date("2018-07-11T02:26:18.671407") == "11.07.2018"
     assert get_date("2024-12-31T23:59:59") == "31.12.2024"
+
+def test_get_date():
+    assert get_date("2018-07-11T02:26:18.671407") == "11.07.2018"
+    assert get_date("2024-12-31T23:59:59.000000") == "31.12.2024"
