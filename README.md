@@ -25,3 +25,13 @@ git@github.com:tutulinmaksim4-cmyk/programm.git
 ```
 poetry install
 ```
+
+### Тестировка кода
+* Модуль test_masks имеет тесты к функциям:
+get_mask_card_number, get_mask_account из модуля masks.py.
+* Модуль test_processing имеет тесты к функциям: 
+filter_by_state, sort_by_date из модуля processing.py.
+* Модуль test_widget имеет тексты к функциям:
+mask_account_card, get_date из модуля widget.py.
+=======
+
