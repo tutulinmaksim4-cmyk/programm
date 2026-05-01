@@ -33,17 +33,22 @@ def empty_list():
 
 # --- ТЕСТЫ filter_by_currency ---
 
-def test_filter_by_currency_usd(transactions_list):
-    """Проверка фильтрации существующей валюты (USD)"""
-    result = list(filter_by_currency(transactions_list, "USD"))
-    assert len(result) == 2
-    assert result[0]["id"] == 1
-    assert result[1]["id"] == 3
+@pytest.mark.parametrize("currency, expected_count", [
+    ("USD", 2),  # Валюта есть в списке (2 шт)
+    ("RUB", 1),  # Валюта есть в списке (1 шт)
+    ("EUR", 0),  # Валюты нет в списке
+    ("", 0)      # Пустой запрос
+])
+def test_filter_by_currency_parameterized(transactions_list, currency, expected_count):
+    """Параметризованный тест фильтрации валют"""
+    result = list(filter_by_currency(transactions_list, currency))
+    assert len(result) == expected_count
+    for trans in result:
+        assert trans["operationAmount"]["currency"]["code"] == currency
 
-def test_filter_by_currency_not_found(transactions_list):
-    """Проверка случая, когда такой валюты нет в списке"""
-    result = list(filter_by_currency(transactions_list, "EUR"))
-    assert len(result) == 0
+def test_filter_by_currency_empty_input():
+    """Отдельный тест на пустой входной список (не требует параметризации)"""
+    assert list(filter_by_currency([], "USD")) == []
 
 # --- ТЕСТЫ transaction_descriptions ---
 
