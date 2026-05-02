@@ -17,7 +17,18 @@
     - `filter_by_currency`: Фильтрация транзакций по заданной валюте.
     - `transaction_descriptions`: Получение описания операций.
     - `card_number_generator`: Генерация номеров банковских карт заданного диапазона.
-  
+
+## Использование генераторов (Пример)
+
+python
+from src.generators import card_number_generator
+
+ Генерация номеров карт от 1 до 5
+for card in card_number_generator(1, 5):
+    print(card)
+
+ Вывод: 0000 0000 0000 0001 ...
+
 ## Установка
 1. Убедитесь, что у вас установлен [poetry](https://python-poetry.org/).
 2. Клонируйте репозиторий.
@@ -30,12 +41,19 @@ git@github.com:tutulinmaksim4-cmyk/programm.git
 poetry install
 ```
 
-### Тестировка кода
-* Модуль test_masks имеет тесты к функциям:
-get_mask_card_number, get_mask_account из модуля masks.py.
-* Модуль test_processing имеет тесты к функциям: 
-filter_by_state, sort_by_date из модуля processing.py.
-* Модуль test_widget имеет тексты к функциям:
-mask_account_card, get_date из модуля widget.py.
-=======
+## Требования
+- Python 3.10 или выше (в разработке использовался Python 3.14)
+- Poetry для управления зависимостями
 
+
+## Тестирование
+В проекте используется pytest. Для запуска всех тестов выполните:
+
+bash
+poetry run pytest
+
+### Отчет о покрытии (Coverage)
+Чтобы увидеть процент покрытия кода тестами в терминале:
+
+bash
+poetry run pytest --cov=src
