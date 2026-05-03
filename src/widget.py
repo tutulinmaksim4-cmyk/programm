@@ -27,5 +27,5 @@ def mask_account_card(info: str) -> str:
 def get_date(date_str: str) -> str:
     """ Принимаем строку с датой в исходном формате
      и выводим измененный формат"""
-    dt_object = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%f")
+    dt_object = datetime.fromisoformat(date_str)
     return dt_object.strftime("%d.%m.%Y")
