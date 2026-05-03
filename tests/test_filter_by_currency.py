@@ -52,6 +52,16 @@ def test_filter_by_currency_empty_input():
 
 # --- ТЕСТЫ transaction_descriptions ---
 
+@pytest.mark.parametrize("index, expected_description", [
+    (0, "Перевод организации"),
+    (1, "Перевод со счета на счет"),
+    (2, "Перевод с карты на карту")
+])
+def test_transaction_descriptions_values(transactions_list, index, expected_description):
+    """Проверка конкретных описаний по индексам через параметризацию"""
+    descriptions = list(transaction_descriptions(transactions_list))
+    assert descriptions[index] == expected_description
+
 def test_transaction_descriptions_correct(transactions_list):
     """Проверка возвращаемых описаний"""
     descriptions = transaction_descriptions(transactions_list)
@@ -61,6 +71,31 @@ def test_transaction_descriptions_correct(transactions_list):
 
 
 # --- ТЕСТЫ card_number_generator ---
+
+@pytest.mark.parametrize("start, stop, expected_first, expected_last, expected_len", [
+    (1, 3, "0000 0000 0000 0001", "0000 0000 0000 0003", 3),
+    (10, 10, "0000 0000 0000 0010", "0000 0000 0000 0010", 1),
+    (9999999999999998, 9999999999999999, "9999 9999 9999 9998", "9999 9999 9999 9999", 2)
+])
+def test_card_number_generator_params(start, stop, expected_first, expected_last, expected_len):
+    """Проверка генератора карт с разными диапазонами"""
+    result = list(card_number_generator(start, stop))
+    assert len(result) == expected_len
+    assert result[0] == expected_first
+    assert result[-1] == expected_last
+
+@pytest.mark.parametrize("number", [1, 100, 9999])
+def test_card_number_generator_format(number):
+    """Проверка правильности формата (пробелы и длина) для разных чисел"""
+    gen = card_number_generator(number, number)
+    card = next(gen)
+    # Проверка формата XXXX XXXX XXXX XXXX (19 символов с пробелами)
+    assert len(card) == 19
+    assert card[4] == " "
+    assert card[9] == " "
+    assert card[14] == " "
+    # Проверяем, что внутри нет букв, только цифры и пробелы
+    assert card.replace(" ", "").isdigit()
 
 def test_card_number_generator_values():
     """Проверка значений и диапазона"""
