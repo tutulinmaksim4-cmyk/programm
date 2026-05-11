@@ -65,4 +65,5 @@ def test_log_to_file_error():
         log_content = f.read().strip()
 
     assert "fail_func error: ValueError" in log_content
+
     os.remove(filename)
