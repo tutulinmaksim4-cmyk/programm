@@ -17,4 +17,5 @@ def get_transactions_data(path):
             return []
     except (json.JSONDecodeError, UnicodeDecodeError):
         # Если файл пустой или битый JSON
+
         return []

@@ -2,6 +2,7 @@ import pytest
 from unittest.mock import patch
 from src.external_api import convert_to_rub
 
+
 @patch("requests.get")
 def test_convert_to_rub_usd(mock_get):
     # Имитируем ответ от API
@@ -13,9 +14,11 @@ def test_convert_to_rub_usd(mock_get):
     }
     assert convert_to_rub(transaction) == 7500.0
 
+
 def test_convert_to_rub_local():
     transaction = {
         "operationAmount": {"amount": "500", "currency": {"code": "RUB"}}
     }
     # Здесь Mock не нужен, так как запроса к API не будет
+
     assert convert_to_rub(transaction) == 500.0

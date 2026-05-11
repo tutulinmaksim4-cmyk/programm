@@ -1,10 +1,12 @@
-import requests
 import os
+
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
+
 
 def convert_to_rub(transaction):
     """Возвращает сумму транзакции в рублях (float)."""
@@ -24,5 +26,6 @@ def convert_to_rub(transaction):
         data = response.json()
         return float(data["result"])
     except (requests.RequestException, KeyError):
+
         print("Ошибка при обращении к API")
         return 0.0

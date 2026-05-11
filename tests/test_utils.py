@@ -1,7 +1,8 @@
+import os
 import pytest
 from unittest.mock import patch, mock_open
 from src.utils import get_transactions_data
-import os
+
 
 # 1. Тест на успешное чтение
 @patch("os.path.exists", return_value=True)

@@ -3,7 +3,6 @@ import pytest
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
-
 @pytest.fixture
 def transactions_list():
     """Фикстура со стандартным списком транзакций"""
@@ -24,6 +23,7 @@ def transactions_list():
             "operationAmount": {"currency": {"code": "USD"}}
         }
     ]
+
 
 @pytest.fixture
 def empty_list():
@@ -46,11 +46,13 @@ def test_filter_by_currency_parameterized(transactions_list, currency, expected_
     for trans in result:
         assert trans["operationAmount"]["currency"]["code"] == currency
 
+
 def test_filter_by_currency_empty_input():
     """Отдельный тест на пустой входной список (не требует параметризации)"""
     assert list(filter_by_currency([], "USD")) == []
 
 # --- ТЕСТЫ transaction_descriptions ---
+
 
 @pytest.mark.parametrize("index, expected_description", [
     (0, "Перевод организации"),
@@ -61,6 +63,7 @@ def test_transaction_descriptions_values(transactions_list, index, expected_desc
     """Проверка конкретных описаний по индексам через параметризацию"""
     descriptions = list(transaction_descriptions(transactions_list))
     assert descriptions[index] == expected_description
+
 
 def test_transaction_descriptions_correct(transactions_list):
     """Проверка возвращаемых описаний"""
@@ -77,12 +80,15 @@ def test_transaction_descriptions_correct(transactions_list):
     (10, 10, "0000 0000 0000 0010", "0000 0000 0000 0010", 1),
     (9999999999999998, 9999999999999999, "9999 9999 9999 9998", "9999 9999 9999 9999", 2)
 ])
+
+
 def test_card_number_generator_params(start, stop, expected_first, expected_last, expected_len):
     """Проверка генератора карт с разными диапазонами"""
     result = list(card_number_generator(start, stop))
     assert len(result) == expected_len
     assert result[0] == expected_first
     assert result[-1] == expected_last
+
 
 @pytest.mark.parametrize("number", [1, 100, 9999])
 def test_card_number_generator_format(number):
@@ -96,6 +102,7 @@ def test_card_number_generator_format(number):
     assert card[14] == " "
     # Проверяем, что внутри нет букв, только цифры и пробелы
     assert card.replace(" ", "").isdigit()
+
 
 def test_card_number_generator_values():
     """Проверка значений и диапазона"""
