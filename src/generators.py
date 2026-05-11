@@ -4,7 +4,7 @@ def filter_by_currency(transactions, currency_code):
     Возвращает итератор с транзакциями, где код валюты совпадает с заданным.
     """
     for transaction in transactions:
-    # Проверяем наличие вложенных ключей, чтобы избежать ошибок
+        # Проверяем наличие вложенных ключей, чтобы избежать ошибок
 
         if transaction.get('operationAmount', {}).get('currency', {}).get('code') == currency_code:
             yield transaction
@@ -16,7 +16,7 @@ def transaction_descriptions(transactions):
        выдает значение ключа 'description'.
     """
     for transaction in transactions:
-    # Достаем описание. Если ключа вдруг нет, вернем пустую строку или текст об ошибке.
+        # Достаем описание. Если ключа вдруг нет, вернем пустую строку или текст об ошибке.
         yield transaction.get("description", "Описание отсутствует")
 
 
