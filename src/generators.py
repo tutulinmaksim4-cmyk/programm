@@ -1,4 +1,7 @@
-def filter_by_currency(transactions, currency_code):
+from typing import Iterable, Any
+
+
+def filter_by_currency(transactions: list[dict], currency_code: str) -> Iterable[dict]:
     """
     Принимает список транзакций и код валюты (например, 'USD').
     Возвращает итератор с транзакциями, где код валюты совпадает с заданным.
